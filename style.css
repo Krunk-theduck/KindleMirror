@@ -1,0 +1,296 @@
+:root {
+    --background-color: #000000; /* Pure Black */
+    --time-text-color: #eeeeee;
+    --primary-info-color: #e0e0e0;
+    --secondary-info-color: #cccccc;
+    --quote-text-color: #999999; /* Slightly more visible for author */
+    --quote-author-color: #777777;
+    --accent-color-blue: #5ac8fa;
+    --accent-color-gold: #f5a623;
+    
+    --font-family-serif: 'Playfair Display', 'Merriweather', serif;
+    --font-family-sans: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    color: var(--primary-info-color);
+    font-family: var(--font-family-sans);
+    overflow: hidden;
+}
+
+.mirror-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    padding: 15px; /* Overall padding for the mirror face */
+    box-sizing: border-box;
+}
+
+/* --- Header Bar --- */
+.header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 15px; /* Reduced padding as container has padding */
+    flex-shrink: 0; /* Prevent shrinking */
+    height: auto; /* Let content define height, or set a fixed % like 10-15% */
+}
+
+.time-date-container {
+    text-align: center;
+}
+.clock {
+    font-family: var(--font-family-serif);
+    font-size: 48px;
+    font-weight: 400;
+    color: var(--time-text-color);
+    line-height: 1.0;
+    margin-bottom: 2px;
+}
+.date {
+    font-family: var(--font-family-serif);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--secondary-info-color);
+}
+
+.user-icon-container {
+    cursor: pointer;
+    padding-top: 5px; /* Align better with clock */
+}
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px; /* For Font Awesome icon */
+    color: var(--secondary-info-color);
+    transition: background-color 0.3s;
+}
+.user-icon.signed-in {
+    background-color: var(--accent-color-blue);
+    color: white;
+}
+.user-icon img { /* If using an image for profile pic */
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/* --- Main Content --- */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Try to center vertically a bit more */
+    padding: 10px 0;
+    text-align: center;
+    overflow: hidden; /* Prevent scroll within this section if content too big */
+    gap: 20px; /* Space between weather and calendar */
+}
+
+.weather-section {
+    margin-bottom: 10px; /* Further reduced as main-content has gap */
+}
+.weather-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+.weather-icon-fa {
+    font-size: 56px; /* Adjust size for FA icons */
+    color: var(--accent-color-blue);
+}
+.temperature {
+    font-size: 48px;
+    font-weight: 500;
+}
+.weather-details {
+    font-size: 18px;
+    color: var(--secondary-info-color);
+    line-height: 1.4;
+}
+
+.calendar-section {
+    width: 95%;
+    max-width: 450px;
+    /* margin-top: auto; remove to allow natural flow with gap */
+}
+.calendar-section h3 {
+    font-size: 20px;
+    font-weight: 500; /* Less bold */
+    margin-bottom: 10px;
+    color: var(--primary-info-color);
+}
+.calendar-message, .calendar-list {
+    font-size: 16px;
+    color: var(--secondary-info-color);
+}
+.calendar-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    max-height: 150px; /* Limit height and allow scroll if many events */
+    overflow-y: auto;
+}
+/* Custom scrollbar for calendar list (optional, WebKit browsers) */
+.calendar-list::-webkit-scrollbar {
+    width: 6px;
+}
+.calendar-list::-webkit-scrollbar-track {
+    background: #222;
+    border-radius: 3px;
+}
+.calendar-list::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 3px;
+}
+.calendar-list li {
+    margin-bottom: 8px;
+    padding: 5px 8px;
+    background-color: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+}
+.calendar-list li .event-time {
+    font-weight: 500;
+    color: var(--primary-info-color);
+    margin-right: 8px;
+}
+
+
+/* --- Footer Quote --- */
+.footer-quote {
+    flex-shrink: 0;
+    padding: 15px 20px; /* Increased padding for quote area */
+    min-height: 10%; /* Ensure it has some space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quote-wrapper {
+    text-align: center;
+}
+.quote-text {
+    font-family: var(--font-family-serif);
+    font-size: 17px; /* Slightly larger */
+    font-style: italic;
+    font-weight: 300;
+    color: var(--quote-text-color);
+    margin-bottom: 5px; /* Space between quote and author */
+    opacity: 1;
+    transition: opacity 0.75s ease-in-out;
+}
+.quote-author {
+    font-family: var(--font-family-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--quote-author-color);
+    opacity: 1;
+    transition: opacity 0.75s ease-in-out;
+}
+.quote-text.fade, .quote-author.fade {
+    opacity: 0;
+}
+
+/* --- Modal --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8); /* Darker overlay */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.modal-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+.modal-content {
+    background-color: #1e1e1e; /* Slightly lighter than pure black */
+    padding: 25px 30px;
+    border-radius: 8px;
+    min-width: 280px;
+    max-width: 90%;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    transform: scale(0.95);
+    transition: transform 0.3s ease-in-out;
+}
+.modal-overlay.visible .modal-content {
+    transform: scale(1);
+}
+.modal-content h2 {
+    font-family: var(--font-family-sans);
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--time-text-color);
+    font-weight: 500;
+}
+.modal-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    background-color: var(--accent-color-blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-family-sans);
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+}
+.modal-button:hover {
+    background-color: #4aa0d1;
+}
+.modal-button:last-of-type {
+    margin-bottom: 0; /* Remove margin from last button if it's not close */
+}
+.modal-button.secondary {
+    background-color: #444;
+}
+.modal-button.secondary:hover {
+    background-color: #333;
+}
+.close-modal-button {
+    background: none;
+    border: none;
+    color: var(--secondary-info-color);
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 15px;
+    padding: 5px;
+}
+.close-modal-button:hover {
+    color: var(--time-text-color);
+}
+
+/* Styling for Google's Sign-In Button if rendered directly */
+#googleSignInButtonContainer > div {
+    margin: 0 auto 15px auto !important; /* Center Google's button and add margin */
+}
