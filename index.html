@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>Pocket Magic Mirror</title>
+	<link rel="stylesheet" href="style.css">
+	<!-- Font Awesome for Icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Playfair+Display:wght@400;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap"
+		rel="stylesheet">
+
+	<!-- Google Identity Services & API Client -->
+	<!-- IMPORTANT: Added onload callbacks -->
+	<script src="https://accounts.google.com/gsi/client" onload="gisLoaded()" async defer></script>
+	<script src="https://apis.google.com/js/api.js" onload="gapiLoaded()" async defer></script>
+</head>
+
+<body>
+	<div class="mirror-container">
+		<div class="header-bar">
+			<div class="time-date-container">
+				<div id="clock" class="clock">00:00 AM</div>
+				<div id="date" class="date">Monday, January 1</div>
+			</div>
+			<div class="user-icon-container" id="userIconContainer">
+				<div class="user-icon" id="userIcon">
+					<i class="fas fa-user-circle"></i>
+				</div>
+			</div>
+		</div>
+
+		<div class="main-content">
+			<div class="weather-section">
+				<div class="weather-summary">
+					<i id="weather-icon" class="fas fa-cloud weather-icon-fa"></i>
+					<div id="temperature" class="temperature">--°F</div>
+				</div>
+				<div id="weather-details" class="weather-details">
+					Loading weather...
+				</div>
+			</div>
+
+			<div class="calendar-section" id="calendarSection">
+				<h3 id="calendar-title">Today's Events</h3>
+				<div id="calendar-message" class="calendar-message">Sign in to see your schedule.</div>
+				<ul id="calendar-list" class="calendar-list">
+					<!-- JS will populate this -->
+				</ul>
+			</div>
+		</div>
+
+		<div class="footer-quote">
+			<div class="quote-wrapper">
+				<p id="quote-text" class="quote-text">"Loading inspirational quote..."</p>
+				<p id="quote-author" class="quote-author"></p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal for Sign In / Settings -->
+	<div class="modal-overlay" id="settingsModal">
+		<div class="modal-content">
+			<h2 id="modal-title">Options</h2>
+			<div id="googleSignInButtonContainer">
+				<!-- Google's button will render here -->
+			</div>
+			<button class="modal-button" id="signOutButton" style="display:none;">Sign Out</button>
+			<button class="modal-button secondary" id="refreshDataButton">Refresh Data</button>
+			<button class="close-modal-button" id="closeModalButton">Close</button>
+		</div>
+	</div>
+
+	<script src="script.js" defer></script>
+</body>
+
+</html>
